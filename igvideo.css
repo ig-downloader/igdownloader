@@ -8,6 +8,10 @@ body {
   padding: 0;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .header {
   height: 9vh;
   width: 97.4%;
