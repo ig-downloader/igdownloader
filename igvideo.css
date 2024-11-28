@@ -227,6 +227,17 @@ h1 {
   height: 55px;
 }
 
+.loadingtext {
+  height: 18px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-text {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: none;
+}
 .content {
   height: 800px;
   width: 90%;
@@ -389,7 +400,7 @@ h1 {
   }
 }
 
-@media only screen and (max-width: 655px) {
+/* @media only screen and (max-width: 655px) {
   .form-input {
     height: 60px;
   }
@@ -418,7 +429,7 @@ h1 {
   .search-from_button {
     height: 60px;
   }
-}
+} */
 
 @media only screen and (max-width: 655px) {
   .search-from {
@@ -451,9 +462,6 @@ h1 {
   .step p {
     font-size: 14px;
   }
-}
-
-@media only screen and (max-width: 655px) {
   .how-title h3 {
     font-size: 21px;
   }
@@ -464,6 +472,18 @@ h1 {
     font-size: 14px;
   }
 }
+
+/* @media only screen and (max-width: 655px) {
+  .how-title h3 {
+    font-size: 21px;
+  }
+  .note {
+    font-size: 14px;
+  }
+  .devloper-credit p {
+    font-size: 14px;
+  }
+} */
 @media only screen and (max-width: 655px) {
   .search-from {
     width: 500px;
