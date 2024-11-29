@@ -81,7 +81,7 @@ subBtn.addEventListener("click", (evt) => {
 
       // Parse the JSON response
       const result = JSON.parse(this.responseText);
-      console.log(result);
+      // console.log(result);
 
       // Check if the response contains a video URL
       if (result && result.media[0].url) {
