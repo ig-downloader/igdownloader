@@ -55,6 +55,8 @@ subBtn.addEventListener("click", (evt) => {
   if (amtValue === null) {
     alert("please insert correct link");
   }
+
+  inputData.value = "";
   // console.log(amtValue);
 
   loadingtext.style.display = "block";
