@@ -23,7 +23,7 @@ body {
 .logo {
   height: 4vh;
   width: 4vh;
-  padding-right: 3px;
+  padding-right: 6px;
 }
 
 .headertext {
@@ -692,7 +692,7 @@ h1 {
     width: 420px;
   }
   .headertext {
-    font-size: 19px;
+    font-size: 22px;
   }
   .search-from {
     height: 42px;
