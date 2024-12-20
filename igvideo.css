@@ -541,7 +541,7 @@ h1 {
   }
 
   .step p img {
-    height: 120px;
+    height: 450px;
   }
 }
 
@@ -603,6 +603,11 @@ h1 {
   }
   .search-form_label {
     height: 50px;
+  }
+}
+@media only screen and (max-width: 470px) {
+  .main-header h1 {
+    font-size: 33px;
   }
 }
 @media only screen and (max-width: 463px) {
@@ -680,7 +685,7 @@ h1 {
     font-size: 15px;
   }
   .step p img {
-    height: 120px;
+    height: 400px;
   }
   .devloper-credit {
     margin-top: 20px;
@@ -718,7 +723,7 @@ h1 {
     padding: 0;
   }
   .step p img {
-    height: 110px;
+    height: 400px;
   }
 }
 @media only screen and (max-width: 380px) {
@@ -787,5 +792,8 @@ h1 {
   }
   .steps {
     padding: 0;
+  }
+  .devloper-credit {
+    margin: 0;
   }
 }
