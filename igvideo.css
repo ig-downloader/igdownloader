@@ -23,6 +23,7 @@ body {
 .logo {
   height: 4vh;
   width: 4vh;
+  padding-right: 3px;
 }
 
 .headertext {
