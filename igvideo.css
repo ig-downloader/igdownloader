@@ -1,7 +1,7 @@
-/* html,
+html,
 body {
   overflow-x: hidden;
-} */
+}
 
 * {
   margin: 0;
@@ -14,16 +14,20 @@ body {
 
 .header {
   height: 9vh;
-  width: 97.4%;
+  width: 100%;
   background-color: #f0f0f0;
   display: flex;
   align-items: center;
   padding-left: 30px;
 }
+.logo {
+  height: 4vh;
+  width: 4vh;
+}
 
 .headertext {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
 }
 
@@ -240,8 +244,8 @@ h1 {
 }
 .content {
   height: 800px;
-  width: 90%;
-  margin: 40px 40px;
+  width: 100%;
+  margin: 0;
 }
 
 .how-title {
@@ -269,12 +273,15 @@ h1 {
 }
 
 .steps {
-  padding: 6px;
+  /* padding: 6px; */
+  margin-left: 35px;
+  display: block;
   width: 90%;
 }
 
 .step {
   width: 90%;
+  padding: 0;
 }
 
 .step-label {
@@ -338,6 +345,8 @@ h1 {
   gap: 20px;
 }
 .footer-link {
+  margin-top: 20px;
+  padding: 20px 20px 0px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -358,13 +367,28 @@ h1 {
   align-items: center;
 }
 
+@media only screen and (max-width: 917px) {
+  .header {
+    width: 100%;
+  }
+  .main {
+    width: 100%;
+  }
+  .content {
+    height: 1000px;
+    width: 100%;
+  }
+  .step p img {
+    height: 500px;
+  }
+}
 @media only screen and (max-width: 797px) {
   .headertext {
     font-size: 1.5rem;
   }
 
   .step p img {
-    height: 450px;
+    height: 120px;
     width: 100%;
   }
 }
@@ -401,35 +425,35 @@ h1 {
 }
 
 /* @media only screen and (max-width: 655px) {
-  .form-input {
-    height: 60px;
-  }
-  .search-from {
-    width: 600px;
-    height: 55px;
-  }
-
-  .warning-div {
-    margin-top: 10px;
-  }
-  .search-form_label {
-    height: 60px;
-  }
-  .search-from_input {
-    height: 60px;
-    font-size: 18px;
-  }
-  .search-from_clipboard-paste {
-    height: 60px;
-  }
-  .clipboard-clear {
-    height: 60px;
-    padding: auto;
-  }
-  .search-from_button {
-    height: 60px;
-  }
-} */
+    .form-input {
+      height: 60px;
+    }
+    .search-from {
+      width: 600px;
+      height: 55px;
+    }
+  
+    .warning-div {
+      margin-top: 10px;
+    }
+    .search-form_label {
+      height: 60px;
+    }
+    .search-from_input {
+      height: 60px;
+      font-size: 18px;
+    }
+    .search-from_clipboard-paste {
+      height: 60px;
+    }
+    .clipboard-clear {
+      height: 60px;
+      padding: auto;
+    }
+    .search-from_button {
+      height: 60px;
+    }
+  } */
 
 @media only screen and (max-width: 655px) {
   .search-from {
@@ -473,7 +497,7 @@ h1 {
   }
 }
 
-/* @media only screen and (max-width: 655px) {
+@media only screen and (max-width: 655px) {
   .how-title h3 {
     font-size: 21px;
   }
@@ -483,7 +507,7 @@ h1 {
   .devloper-credit p {
     font-size: 14px;
   }
-} */
+}
 @media only screen and (max-width: 655px) {
   .search-from {
     width: 500px;
@@ -516,17 +540,18 @@ h1 {
   }
 
   .step p img {
-    height: 370px;
+    height: 120px;
   }
 }
 
-@media only screen and (max-width: 655px) {
+@media only screen and (max-width: 525px) {
   .search-from_input {
     height: 54px;
     font-size: 17px;
   }
   .search-from {
     height: 55px;
+    width: 475px;
   }
   .search-from_clipboard-paste {
     width: 85px;
@@ -620,7 +645,7 @@ h1 {
   }
 }
 
-@media only screen and (max-width: 427px) {
+@media only screen and (max-width: 447px) {
   .main {
     width: 447px;
   }
@@ -654,14 +679,14 @@ h1 {
     font-size: 15px;
   }
   .step p img {
-    height: 320px;
+    height: 120px;
   }
   .devloper-credit {
     margin-top: 20px;
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 420px) {
   .main {
     width: 420px;
   }
@@ -692,7 +717,7 @@ h1 {
     padding: 0;
   }
   .step p img {
-    height: 300px;
+    height: 110px;
   }
 }
 @media only screen and (max-width: 380px) {
@@ -718,9 +743,15 @@ h1 {
   }
 }
 @media only screen and (max-width: 360px) {
-  /* .header {
+  .header {
+    width: 92%;
+  }
+  .main {
     width: 100%;
-  } */
+  }
+  .content {
+    height: 100%;
+  }
   .search-from {
     height: 42px;
     width: 330px;
@@ -752,5 +783,8 @@ h1 {
   .col-1 {
     margin-top: 20px;
     width: 100%;
+  }
+  .steps {
+    padding: 0;
   }
 }
