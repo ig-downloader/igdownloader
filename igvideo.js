@@ -55,13 +55,11 @@ subBtn.addEventListener("click", (evt) => {
   if (amtValue === null) {
     alert("please insert correct link");
   }
-
-  inputData.value = "";
   // console.log(amtValue);
 
   loadingtext.style.display = "block";
 
-  const apiUrl = `https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert?url=${encodeURIComponent(
+  const apiUrl = `https://instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com/get-info-rapidapi?url=${encodeURIComponent(
     amtValue
   )}`;
 
@@ -86,7 +84,7 @@ subBtn.addEventListener("click", (evt) => {
       // console.log(result);
 
       // Check if the response contains a video URL
-      if (result && result.media[0].url) {
+      if (result && result.download_url) {
         // Clear previous content
         videoContainer.innerHTML = "";
 
@@ -97,16 +95,16 @@ subBtn.addEventListener("click", (evt) => {
         videoElement.setAttribute("height", "600");
 
         const videoSource = document.createElement("source");
-        videoSource.setAttribute("src", result.media[0].url);
+        videoSource.setAttribute("src", result.download_url);
         videoSource.setAttribute("type", "video/mp4");
 
         videoElement.appendChild(videoSource);
         videoContainer.appendChild(videoElement);
 
-        downloadBtn.href = result.media[0].url;
+        downloadBtn.href = result.download_url;
         downloadBtn.download = "igdownloader.mp4"; // Set the video URL to the download link
         downloadBtn.style.display = "inline-block";
-      } else if (result && result.media[0].thumbnail) {
+      } else if (result && result.thumb) {
         loadingtext.style.display = "none";
         // If a video is not available, show the image instead
         // videoContainer.innerHTML = `<img src="${result.thumb}" alt="Instagram Image" width="640">`;
@@ -114,7 +112,7 @@ subBtn.addEventListener("click", (evt) => {
         const imgElement = document.createElement("img");
         imgElement.setAttribute("width", "400");
         imgElement.setAttribute("height", "600");
-        imgElement.setAttribute("src", result.media[0].thumbnail);
+        imgElement.setAttribute("src", result.thumb);
 
         // const videoSource = document.createElement('source');
         // videoSource.setAttribute('src', result.video_url);
@@ -122,7 +120,7 @@ subBtn.addEventListener("click", (evt) => {
 
         videoContainer.appendChild(imgElement);
 
-        downloadBtn.href = result.media[0].thumbnail;
+        downloadBtn.href = result.thumb;
         downloadBtn.download = "igdownloader.jpg"; // Set the video URL to the download link
         downloadBtn.style.display = "inline-block";
       } else {
@@ -137,40 +135,13 @@ subBtn.addEventListener("click", (evt) => {
   xhr.open("GET", apiUrl);
   xhr.setRequestHeader(
     "x-rapidapi-key",
-    "86c072f781msh85f14a700e9b2b0p128e2cjsnf2e2ccde710c"
+    "2fb2b77548mshd30adc954a5b093p124718jsn1df3a6f03413"
   );
   xhr.setRequestHeader(
     "x-rapidapi-host",
-    "instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com"
+    "instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com"
   );
 
   // Send the request
   xhr.send(data);
 });
-
-// const apiUrl = `https://instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com/get-info-rapidapi?url=${encodeURIComponent(
-//   amtValue
-// )}`;
-
-// const data = null;
-
-// const xhr = new XMLHttpRequest();
-// xhr.withCredentials = true;
-
-// xhr.addEventListener("readystatechange", function () {
-//   if (this.readyState === this.DONE) {
-//     console.log(this.responseText);
-//   }
-// });
-
-// xhr.open("GET", apiUrl);
-// xhr.setRequestHeader(
-//   "x-rapidapi-key",
-//   "8b08490cf5msh54e1aed9629a6e7p12f444jsn84380ca40c13"
-// );
-// xhr.setRequestHeader(
-//   "x-rapidapi-host",
-//   "instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com"
-// );
-
-// xhr.send(data);
