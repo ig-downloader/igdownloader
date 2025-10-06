@@ -42,106 +42,90 @@ function clearInputAndToggle() {
   }
 }
 
-let inputData = document.querySelector(".search-from_input");
-
-// console.log(inputData);
-
-let subBtn = document.querySelector(".search-from_button");
+// Input, button, and UI elements
+const inputData = document.querySelector(".search-from_input");
+const subBtn = document.querySelector(".search-from_button");
 const loadingtext = document.querySelector(".loading-text");
+const videoContainer = document.querySelector(".result-div");
+const resultDiv = document.querySelector(".outer-result-div");
+const downloadBtn = document.getElementById("download-btn");
 
-subBtn.addEventListener("click", (evt) => {
+// Handle submit click
+subBtn.addEventListener("click", async (evt) => {
   evt.preventDefault();
-  var amtValue = inputData.value;
-  if (amtValue === null) {
-    alert("please insert correct link");
+
+  const amtValue = inputData.value.trim();
+  if (!amtValue) {
+    alert("Please insert a valid Instagram link");
+    return;
   }
-  // console.log(amtValue);
+  inputData.value = "";
 
+  // Show loading indicator
   loadingtext.style.display = "block";
+  resultDiv.style.display = "none";
+  videoContainer.innerHTML = "";
+  downloadBtn.style.display = "none";
 
-  const apiUrl = `https://instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com/get-info-rapidapi?url=${encodeURIComponent(
+  // ✅ Use your fixed API
+  const apiUrl = `https://instagram-reels-downloader-api.p.rapidapi.com/download?url=${encodeURIComponent(
     amtValue
   )}`;
 
-  const videoContainer = document.querySelector(".result-div");
-  const resultDiv = document.querySelector(".outer-result-div");
-  const downloadBtn = document.getElementById("download-btn");
+  const options = {
+    method: "GET",
+    headers: {
+      "x-rapidapi-key": "86c072f781msh85f14a700e9b2b0p128e2cjsnf2e2ccde710c", //8b08490cf5msh54e1aed9629a6e7p12f444jsn84380ca40c13
+      "x-rapidapi-host": "instagram-reels-downloader-api.p.rapidapi.com",
+    },
+  };
 
-  const data = null;
+  try {
+    const response = await fetch(apiUrl, options);
 
-  resultDiv.style.display = "none";
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-  const xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
+    // Parse JSON
+    const result = await response.json();
+    // console.log("✅ API JSON Response:", result);
 
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === this.DONE) {
-      resultDiv.style.display = "flex";
-      loadingtext.style.display = "none";
+    // Hide loading, show result container
+    loadingtext.style.display = "none";
+    resultDiv.style.display = "flex";
 
-      // Parse the JSON response
-      const result = JSON.parse(this.responseText);
-      // console.log(result);
+    // Display video if available
+    if (
+      result.data.medias[0].url &&
+      result.data.medias[0].url.includes("http")
+    ) {
+      const video = document.createElement("video");
+      video.src = result.data.medias[0].url;
+      video.controls = true;
+      video.width = 320;
+      video.height = 600;
+      videoContainer.appendChild(video);
 
-      // Check if the response contains a video URL
-      if (result && result.download_url) {
-        // Clear previous content
-        videoContainer.innerHTML = "";
+      downloadBtn.href = result.data.medias[0].url;
+      downloadBtn.download = "instagram_reel.mp4";
+      downloadBtn.style.display = "inline-block";
+    } else if (data.thumbnail) {
+      // If no video, display thumbnail instead
+      const img = document.createElement("img");
+      img.src = data.thumbnail;
+      img.width = 400;
+      img.height = 600;
+      videoContainer.appendChild(img);
 
-        // Create a video element and set its source
-        const videoElement = document.createElement("video");
-        videoElement.setAttribute("controls", true);
-        videoElement.setAttribute("width", "320");
-        videoElement.setAttribute("height", "600");
-
-        const videoSource = document.createElement("source");
-        videoSource.setAttribute("src", result.download_url);
-        videoSource.setAttribute("type", "video/mp4");
-
-        videoElement.appendChild(videoSource);
-        videoContainer.appendChild(videoElement);
-
-        downloadBtn.href = result.download_url;
-        downloadBtn.download = "igdownloader.mp4"; // Set the video URL to the download link
-        downloadBtn.style.display = "inline-block";
-      } else if (result && result.thumb) {
-        loadingtext.style.display = "none";
-        // If a video is not available, show the image instead
-        // videoContainer.innerHTML = `<img src="${result.thumb}" alt="Instagram Image" width="640">`;
-
-        const imgElement = document.createElement("img");
-        imgElement.setAttribute("width", "400");
-        imgElement.setAttribute("height", "600");
-        imgElement.setAttribute("src", result.thumb);
-
-        // const videoSource = document.createElement('source');
-        // videoSource.setAttribute('src', result.video_url);
-        // videoSource.setAttribute('type', 'video/mp4');
-
-        videoContainer.appendChild(imgElement);
-
-        downloadBtn.href = result.thumb;
-        downloadBtn.download = "igdownloader.jpg"; // Set the video URL to the download link
-        downloadBtn.style.display = "inline-block";
-      } else {
-        // If no video or image URL is found
-        videoContainer.innerHTML =
-          "<p>No video or image found for the provided URL.</p>";
-      }
+      downloadBtn.href = data.thumbnail;
+      downloadBtn.download = "instagram_reel.jpg";
+      downloadBtn.style.display = "inline-block";
+    } else {
+      videoContainer.innerHTML = "<p>No downloadable media found.</p>";
     }
-  });
-
-  // Set the required headers for RapidAPI
-  xhr.open("GET", apiUrl);
-  xhr.setRequestHeader(
-    "x-rapidapi-key",
-    "2fb2b77548mshd30adc954a5b093p124718jsn1df3a6f03413"
-  );
-  xhr.setRequestHeader(
-    "x-rapidapi-host",
-    "instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com"
-  );
-
-  // Send the request
-  xhr.send(data);
+  } catch (err) {
+    console.error("❌ Error fetching API:", err);
+    loadingtext.style.display = "none";
+    resultDiv.style.display = "flex";
+    videoContainer.innerHTML = `<p style="color:red;">Failed to fetch data: ${err.message}</p>`;
+  }
 });
